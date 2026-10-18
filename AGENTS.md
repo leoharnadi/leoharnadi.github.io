@@ -1,12 +1,17 @@
 # Portfolio working agreement
 
+Read `docs/agents/development.md` for setup commands, project structure,
+deployment configuration, and maintenance guidance. Keep operational details
+there; the public README is a short introduction for repository visitors.
+
 ## Scope and architecture
 
 This project is Leo Harnadi Marlin's static portfolio, intended for
-`https://leoharnadi.github.io/`. Use vanilla TypeScript, semantic HTML, and CSS.
+`https://leoharnadi.github.io/`. Use TypeScript, React TSX components, and CSS.
 Vite builds `dist/`; GitHub Actions deploys it to GitHub Pages. Use npm and
-Node.js 24. Keep runtime dependencies minimal. Introduce a framework or a
-backend only when the requested feature justifies it.
+Node.js 24. React renders components at build time; the browser receives static
+HTML and a small TypeScript enhancement script. Do not add client hydration or
+a backend unless a requested feature needs it.
 
 ## Working loop
 
@@ -24,12 +29,15 @@ repeat static markup. Never claim a GitHub deployment ran from a local build.
 
 Preserve unrelated edits. Keep work inside this project. Do not copy the
 other projects' application code, secrets, production data, or framework rules.
-Update README commands when the workflow changes. Commit the npm lockfile
+Update `docs/agents/development.md` when the workflow changes. Commit the npm lockfile
 when dependency inputs change; use `npm ci` for reproducible verification.
 
 ## Content and code
 
 - Keep content readable in HTML without JavaScript; enhance it with TypeScript.
+- Compose pages from typed TSX components, not HTML template strings. Content
+  records belong in `src/content/`; generated HTML belongs only in `.generated/`
+  and `dist/`. Never edit generated pages.
 - Prefer native links and buttons over custom interaction machinery.
 - Keep TypeScript strict. Avoid `any`, unchecked DOM casts, and unnecessary
   abstractions. Handle absent DOM elements deliberately.
@@ -63,9 +71,9 @@ Apply antislop during development and audit the result before handoff. This
 mode follows Leo's request to adapt the guidance for the new project; do not
 restart the installation wizard or repeatedly ask about the mode.
 
-Read `DESIGN.md` before visual changes. The first deliverable is scaffolding,
-so final visual design is deferred. Agree on visual direction before building
-the actual portfolio and record major design reasons and the three dials.
+Read `DESIGN.md` before visual changes. Leo selected a clean, restrained,
+professional design. Keep its rationale and three dials current when making
+material design changes. Projects are currently explicit placeholders.
 Use the user's explicit directions when they differ from skill defaults.
 
 <!-- antislop:start -->
@@ -103,5 +111,5 @@ change domains, or enable external services unless requested.
 
 Report what changed, the checks actually performed, and any verification
 limit. For interface work, verify real destinations and behavior, keyboard
-focus, narrow and wide layouts, and the console. Treat the placeholder as a
-verified scaffold, not as a finished visual portfolio.
+focus, narrow and wide layouts, and the console. Distinguish completed site
+features from placeholder project content and unverified hosted deployment.

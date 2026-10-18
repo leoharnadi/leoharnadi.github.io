@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720">
+  <rect width="960" height="720" fill="#1d3350"/>
+  <path d="M340 360H400M560 360H620" fill="none" stroke="#9ba7b7" stroke-width="3"/>
+  <rect x="160" y="277" width="180" height="166" rx="10" fill="#f9f9fa" stroke="#b6c0cf" stroke-width="2"/>
+  <rect x="400" y="242" width="160" height="236" rx="10" fill="#f9f9fa" stroke="#8c9bb1" stroke-width="2"/>
+  <rect x="620" y="277" width="180" height="166" rx="10" fill="#f9f9fa" stroke="#b6c0cf" stroke-width="2"/>
+  <path d="M218 336L196 360L218 384M282 336L304 360L282 384M257 328L243 392" fill="none" stroke="#95a4b7" stroke-width="3"/>
+  <rect x="432" y="283" width="96" height="38" rx="5" fill="#d2d9e4"/><rect x="432" y="341" width="96" height="38" rx="5" fill="#adbcd0"/><rect x="432" y="399" width="96" height="38" rx="5" fill="#d2d9e4"/>
+  <ellipse cx="710" cy="334" rx="39" ry="14" fill="#d9e0ea" stroke="#9baabd" stroke-width="2"/>
+  <path d="M671 334V386C671 405 749 405 749 386V334M671 360C671 379 749 379 749 360" fill="none" stroke="#9baabd" stroke-width="2"/>
+</svg>
