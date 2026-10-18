@@ -1,0 +1,28 @@
+{
+  "name": "leoharnadi.github.io",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Leo Harnadi Marlin's personal portfolio",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "check": "npm run lint && npm run build"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.2",
+    "eslint": "10.13.0",
+    "globals": "17.13.0",
+    "jiti": "2.7.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2",
+    "vite": "8.3.4"
+  }
+}
