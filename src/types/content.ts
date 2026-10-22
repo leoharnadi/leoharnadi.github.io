@@ -16,8 +16,11 @@ export interface Project {
   title: string;
   category: string;
   summary: string;
+  role?: string;
+  technologies?: readonly string[];
   placeholder: boolean;
   cover: ImageContent;
+  thumbnail?: ImageContent;
   content: readonly ContentBlock[];
   links?: readonly { label: string; href: string }[];
 }

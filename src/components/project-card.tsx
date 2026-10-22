@@ -14,12 +14,11 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     <article className="project-card">
       <a className="project-card-link" href={projectPath(project)} aria-labelledby={titleId} aria-describedby={summaryId}>
         <div className="project-cover">
-          <Image image={project.cover} />
-          <span className="project-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <Image image={project.thumbnail ?? project.cover} />
         </div>
         <div className="project-card-copy">
           <div className="project-category">
-            <span>{project.category}</span>
+            <span>{String(index + 1).padStart(2, '0')} / {project.category}</span>
             {project.placeholder && <span className="placeholder-label">Placeholder</span>}
           </div>
           <h3 id={titleId}>{project.title}</h3>

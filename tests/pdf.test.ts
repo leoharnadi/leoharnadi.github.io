@@ -7,8 +7,9 @@ import { projects } from '../src/content/projects.ts';
 const publicDir = resolve(import.meta.dirname, '../public');
 
 test('PDF includes all project records, and a new record adds a project section', async () => {
-  const project = projects[0];
-  assert.ok(project);
+  const source = projects[0];
+  assert.ok(source);
+  const project = { ...source, content: [] };
   const original = await createPortfolioPdf({ projects: [project], publicDir });
   const extended = await createPortfolioPdf({ projects: [project, { ...project, slug: 'extra-project', title: 'Extra project' }], publicDir });
   assert.ok(original.bytes.subarray(0, 8).toString().startsWith('%PDF-'));

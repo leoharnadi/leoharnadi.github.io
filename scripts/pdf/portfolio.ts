@@ -115,7 +115,7 @@ export async function createPortfolioPdf({ projects, publicDir }: PortfolioPdfOp
   doc.y += 24;
   doc.font('Helvetica-Bold').fontSize(37).fillColor(colors.navy).text(site.name, margin, doc.y, { width, lineGap: 2 });
   doc.y += 18;
-  doc.font('Helvetica').fontSize(18).fillColor(colors.navy).text('Software developer and tutor', margin, doc.y, { width });
+  doc.font('Helvetica').fontSize(18).fillColor(colors.navy).text(site.role, margin, doc.y, { width });
   doc.y += 22;
   paragraph(site.introduction);
   doc.y += 22;
@@ -142,6 +142,8 @@ export async function createPortfolioPdf({ projects, publicDir }: PortfolioPdfOp
     doc.font('Helvetica-Bold').fontSize(29).fillColor(colors.navy).text(text(project.title), margin, doc.y, { width, destination: project.slug });
     doc.y += 14;
     paragraph(project.summary);
+    if (project.role) paragraph(`Role: ${project.role}`);
+    if (project.technologies?.length) paragraph(`Technologies: ${project.technologies.join(', ')}`);
     doc.y += 10;
     await figure(project.cover);
     doc.y += 12;

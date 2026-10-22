@@ -11,6 +11,8 @@ import { ProjectGrid } from '../src/components/project-grid.tsx';
 import { renderRoute } from '../src/render/route.tsx';
 import { DownloadPortfolio } from '../src/components/download-portfolio.tsx';
 import { portfolioDownload } from '../src/content/downloads.ts';
+import { ProjectPage } from '../src/pages/project.tsx';
+import { Figure } from '../src/components/image.tsx';
 
 test('every project gets a direct static URL and matching card link', () => {
   const routes = createRoutes(projects, pages);
@@ -69,6 +71,31 @@ test('the project grid handles an empty collection', () => {
   assert.ok(renderToStaticMarkup(<ProjectGrid projects={[]} />).includes('No projects added yet.'));
 });
 
+test('cards use optional thumbnail artwork while details retain the screenshot', () => {
+  const project = projects[1];
+  assert.ok(project);
+  const card = renderToStaticMarkup(<ProjectCard project={project} index={0} />);
+  const detail = renderToStaticMarkup(<ProjectPage project={project} />);
+  assert.ok(card.includes(project.thumbnail.src));
+  assert.ok(!detail.includes(project.thumbnail.src));
+  assert.ok(detail.includes(project.cover.src));
+  const { thumbnail: _thumbnail, ...withoutThumbnail } = project;
+  void _thumbnail;
+  assert.ok(renderToStaticMarkup(<ProjectCard project={withoutThumbnail} index={0} />).includes(project.cover.src));
+});
+
+test('employer project uses attributed text and illustrative media only', () => {
+  const project = projects[0];
+  assert.ok(project);
+  assert.equal(project.title, 'LMS at Ultimate Education');
+  assert.equal(project.category, 'Work project');
+  assert.ok(project.cover.caption?.includes('not a screenshot'));
+  const html = renderToStaticMarkup(<ProjectPage project={project} />);
+  assert.ok(html.includes('as an employee'));
+  assert.ok(!html.includes('ultimate-education-exam.webp'));
+  assert.ok(!html.includes('ultimate-education-grading.webp'));
+});
+
 test('download links use the shared generated PDF path and filename', () => {
   for (const variant of ['button', 'link'] as const) {
     const html = renderToStaticMarkup(<DownloadPortfolio variant={variant} />);
@@ -76,6 +103,23 @@ test('download links use the shared generated PDF path and filename', () => {
     assert.ok(html.includes(`download="${portfolioDownload.filename}"`));
     assert.ok(html.includes('type="application/pdf"'));
   }
+});
+
+test('project metadata renders when provided and disappears when absent', () => {
+  const project = projects[0];
+  assert.ok(project);
+  const html = renderToStaticMarkup(<ProjectPage project={{ ...project, role: 'Engineer', technologies: ['TypeScript', 'Go'] }} />);
+  assert.ok(html.includes('<dt>Role</dt><dd>Engineer</dd>'));
+  assert.ok(html.includes('<dt>Technologies</dt><dd>TypeScript, Go</dd>'));
+  const { role: _role, technologies: _technologies, ...withoutMetadata } = project;
+  void _role;
+  void _technologies;
+  assert.ok(!renderToStaticMarkup(<ProjectPage project={withoutMetadata} />).includes('project-metadata'));
+});
+
+test('portrait screenshots receive a bounded figure treatment', () => {
+  const html = renderToStaticMarkup(<Figure image={{ src: '/images/example.webp', alt: 'Portrait task view', width: 600, height: 1000 }} />);
+  assert.ok(html.includes('content-image is-portrait'));
 });
 
 test('each route has its own heading and the shared layout', () => {

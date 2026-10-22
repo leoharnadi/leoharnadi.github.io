@@ -92,7 +92,9 @@ are generated from that record. Array order controls the project index.
 
 Put images in `public/images/projects/` and reference them as
 `/images/projects/filename.webp`. Supply meaningful `alt` text and the actual
-width and height. A cover image appears in the card and detail page.
+width and height. A cover image appears in the detail page and PDF. Optional
+`thumbnail` overrides the card image without replacing those screenshots.
+See `cover-assets.md` for generated thumbnail provenance and design rationale.
 Use content blocks to interleave paragraphs and images:
 
 ```ts
@@ -115,12 +117,48 @@ Set `placeholder: false` only when the entry describes real work. Optional
 `links` contain `{ label, href }` records for a real source repository or demo.
 No link controls render when links are absent.
 
+Optional `role` and `technologies` fields appear on project pages and in the
+generated PDF. Do not infer missing technologies from other projects. The
+current records and screenshots follow `docs/agents/content-source.md`.
+
 ### Add a page
 
 Add a `ContentPage` record in `src/content/pages.ts`. Its `slug` becomes
 `/<slug>/`. `navigationLabel` is optional; supplying it adds the page to the
 shared navigation. Pages support the same text, image, and list blocks as
 projects. Keep navigation short enough to remain usable on small screens.
+
+### Downloadable portfolio PDF
+
+The homepage button and shared footer link download
+`/downloads/leo-harnadi-marlin-portfolio.pdf`. Its path and filename live in
+`src/content/downloads.ts`; the reusable link is `DownloadPortfolio`.
+
+`scripts/portfolio-pdf-plugin.ts` generates the PDF during every Vite build
+and emits it into `dist/downloads/`. The existing GitHub Actions workflow
+already runs this build and uploads `dist/`, so no separate PDF job, server,
+or manually uploaded document is needed. Updating `src/content/projects.ts`
+and pushing to `main` updates the site and PDF together after deployment.
+Previously downloaded copies do not change.
+
+The TypeScript builder in `scripts/pdf/portfolio.ts` uses PDFKit for text,
+pagination, links, and bookmarks, and Sharp to convert local project images.
+It includes the introduction, every project record in order, covers, text,
+image captions, list blocks, and project links. Long content adds pages;
+placeholder entries retain their labels. Images must use paths inside
+`public/`, such as `/images/projects/example.webp`. Missing images fail the
+build rather than publishing an incomplete PDF. These libraries run only
+in Node during generation, not in visitors' browsers. CI needs neither Python
+nor a headless browser. The standard PDF fonts suit the current Latin-script
+content; embed a suitable Unicode font before adding other writing systems.
+
+In `npm run dev`, a development-only middleware generates the same PDF at
+the download path. GitHub Pages serves the prebuilt file directly, without
+that middleware. Generation errors return HTTP 500 locally and fail builds.
+
+Do not edit the generated PDF or add a second copy of project descriptions.
+Use `npm run build` to regenerate it locally and `npm run preview` to test
+the static download. PDF generation tests are included in `npm run check`.
 
 ### Components and generation
 

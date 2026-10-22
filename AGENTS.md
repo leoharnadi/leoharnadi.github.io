@@ -73,7 +73,8 @@ restart the installation wizard or repeatedly ask about the mode.
 
 Read `DESIGN.md` before visual changes. Leo selected a clean, restrained,
 professional design. Keep its rationale and three dials current when making
-material design changes. Projects are currently explicit placeholders.
+material design changes. Project content now follows Leo's supplied portfolio
+PDF; see `docs/agents/content-source.md` for provenance and screenshot exclusions.
 Use the user's explicit directions when they differ from skill defaults.
 
 <!-- antislop:start -->

@@ -21,7 +21,7 @@ export function Image({ image, eager = false }: ImageProps) {
 
 export function Figure({ image, eager = false }: ImageProps) {
   return (
-    <figure className="content-image">
+    <figure className={image.height > image.width ? 'content-image is-portrait' : 'content-image'}>
       <Image image={image} eager={eager} />
       {image.caption && <figcaption>{image.caption}</figcaption>}
     </figure>

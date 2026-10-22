@@ -13,7 +13,7 @@ export function HomePage({ projects }: HomePageProps) {
       <section className="hero container" aria-labelledby="intro-heading">
         <div className="hero-copy">
           <p className="eyebrow">Leo Harnadi Marlin</p>
-          <h1 id="intro-heading">Software developer<br /><span>and tutor.</span></h1>
+          <h1 id="intro-heading">{site.role}</h1>
           <p className="hero-introduction">{site.introduction}</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#work">View projects</a>
@@ -23,7 +23,7 @@ export function HomePage({ projects }: HomePageProps) {
         </div>
         <aside className="hero-aside" aria-label="Background">
           <div><span className="detail-label">Based in</span><p>{site.location}</p></div>
-          <div><span className="detail-label">Education</span><p>Computer Science<br />Gadjah Mada University</p></div>
+          <div><span className="detail-label">Education</span><p>Computer Science, 2024<br />Universitas Gadjah Mada</p></div>
         </aside>
       </section>
       <section className="work-section container" id="work" aria-labelledby="work-heading">

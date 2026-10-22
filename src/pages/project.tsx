@@ -15,6 +15,12 @@ export function ProjectPage({ project, nextProject }: ProjectPageProps) {
     <article className="project-detail container">
       <a className="back-link" href="/#work">All projects</a>
       <PageHeading title={project.title} eyebrow={eyebrow} introduction={project.summary} />
+      {(project.role || !!project.technologies?.length) && (
+        <dl className="project-metadata">
+          {project.role && <div><dt>Role</dt><dd>{project.role}</dd></div>}
+          {!!project.technologies?.length && <div><dt>Technologies</dt><dd>{project.technologies.join(', ')}</dd></div>}
+        </dl>
+      )}
       {!!project.links?.length && (
         <div className="project-links">
           {project.links.map((link) => <a className="text-link" key={link.href} href={safeUrl(link.href)}>{link.label}</a>)}

@@ -1,9 +1,10 @@
 export const site = {
   name: 'Leo Harnadi Marlin',
+  role: 'Software Engineer',
   url: 'https://leoharnadi.github.io',
   email: 'leoharnadi@gmail.com',
   github: 'https://github.com/leoharnadi',
-  location: 'Tangerang, Indonesia',
-  description: 'Leo Harnadi Marlin, software developer and tutor in Tangerang, Indonesia.',
-  introduction: 'I build web applications and backend services. I also teach English and maths for IELTS, GMAT, GRE, and SAT preparation.',
+  location: 'South Tangerang, Indonesia',
+  description: 'Leo Harnadi Marlin, Software Engineer. Learning platforms, Telegram tools, and web applications.',
+  introduction: 'I build web applications, including learning platforms and tools for Telegram. I graduated in Computer Science from Universitas Gadjah Mada in 2024.',
 } as const;

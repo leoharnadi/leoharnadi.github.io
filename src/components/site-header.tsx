@@ -13,7 +13,7 @@ export function SiteHeader({ path, pages }: SiteHeaderProps) {
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header container">
         <a className="brand" href="/" aria-label={`${site.name}, home`}>
-          {site.name}<span>Software developer &amp; tutor</span>
+          {site.name}<span>{site.role}</span>
         </a>
         <nav className="site-nav" aria-label="Main navigation">
           <a href="/#work" className={onWork ? 'is-current' : undefined}>Projects</a>

@@ -6,7 +6,7 @@ and React TSX refactor. This supplements the earlier scaffold record in
 
 ## Automated checks
 
-- `npm run check` passed: ESLint, seven content/routing tests, strict TypeScript,
+- `npm run check` passed: ESLint, twelve content/routing/PDF tests, strict TypeScript,
   and the Vite production build.
 - Tests cover generated project URLs; new records appearing in navigation,
   cards, and detail pages without template changes; invalid and duplicate
@@ -59,6 +59,29 @@ and React TSX refactor. This supplements the earlier scaffold record in
 - Copy and quality PASS: abstract slogans were replaced with direct role
   descriptions and action labels. Reusable typed components replace HTML
   strings; generated HTML is isolated from editable source.
+
+## PDF download checks (19 October 2026)
+
+- The build emits a four-page A4 PDF, about 47 KB, alongside the website.
+  All four pages were rendered and visually inspected. Text extraction confirms
+  populated pages, accurate 1-to-4 numbering, three cover images, three project
+  bookmarks, and three internal contents destinations. No blank footer pages
+  remain; a regression test compares actual PDF page objects with the count.
+- The homepage link activated with Enter and downloaded a file whose SHA-256
+  matched the built PDF. Both download links use the same path and filename.
+- At 320 CSS pixels, the homepage button measures 203 by 48 pixels, the footer
+  link is 44 pixels high, and the document has no horizontal overflow. The
+  download focus indicator was visibly inspected. The existing light/navy
+  color tokens are reused rather than adding a new palette.
+- The development PDF endpoint returns HTTP 200, `application/pdf`, an attachment
+  filename, and the expected content length. Production uses a static file.
+- Tests cover automatic inclusion of added records, actual page counts,
+  long-text pagination, all content block types, empty projects, missing images,
+  path traversal rejection, and the shared download link attributes.
+- PDF secondary text contrast on white is 6.20:1; navy headings are 15.18:1.
+  Antislop scope PASS: specific download label, native keyboard-operable link,
+  existing theme styles, no overflow, and honest placeholder content.
+- This verifies local generation and download behavior, not a hosted deployment.
 
 ## Limits
 

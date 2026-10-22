@@ -17,7 +17,7 @@ interface LayoutProps {
 const themeScript = `try { const theme = localStorage.getItem('portfolio-theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch {}`;
 
 export function Layout({ path, title, description, pages, children, notFound = false }: LayoutProps) {
-  const documentTitle = path === '/' ? `${site.name} | Software developer` : `${title} | ${site.name}`;
+  const documentTitle = path === '/' ? `${site.name} | ${site.role}` : `${title} | ${site.name}`;
   const url = `${site.url}${path}`;
   return (
     <html lang="en">
